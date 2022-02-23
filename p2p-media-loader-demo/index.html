@@ -32,14 +32,14 @@
         <title>P2P Media Loader</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <script async src="node_modules/p2p-media-loader-core/build/p2p-media-loader-core.min.js"></script>
+        <script async src="node_modules/p2p-media-loader-core/build/p2p-media-loader-core.js"></script>
         <script async src="p2p-graph.js"></script>
 
         <script>
             const URL_P2P_MEDIA_LOADER_HLSJS =
-                "node_modules/p2p-media-loader-hlsjs/build/p2p-media-loader-hlsjs.min.js";
+                "node_modules/p2p-media-loader-hlsjs/build/p2p-media-loader-hlsjs.js";
             const URL_P2P_MEDIA_LOADER_SHAKA =
-                "node_modules/p2p-media-loader-shaka/build/p2p-media-loader-shaka.min.js";
+                "node_modules/p2p-media-loader-shaka/build/p2p-media-loader-shaka.js";
         </script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
@@ -303,14 +303,14 @@
                                     name="url"
                                     placeholder="Please enter video url"
                                     required
-                                    value="https://akamai-axtest.akamaized.net/routes/lapd-v1-acceptance/www_c4/Manifest.m3u8"
+                                    value="https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd"
                                 />
                             </div>
                             <div class="form-group">
                                 <label for="type">Player:</label>
                                 <select class="form-control" id="type" name="type">
                                     <optgroup label="Hls.js P2P Engine (HLS only)">
-                                        <option value="clappr" selected>Clappr</option>
+                                        <option value="clappr">Clappr</option>
                                         <option value="hlsjs">Hls.js</option>
                                         <option value="flowplayer">Flowplayer</option>
                                         <option value="mediaelement">MediaElement</option>
@@ -321,7 +321,7 @@
                                         <option value="plyr">Plyr</option>
                                     </optgroup>
                                     <optgroup label="Shaka P2P Engine (HLS and DASH)">
-                                        <option value="shakaplayer">Shaka Player</option>
+                                        <option value="shakaplayer" selected>Shaka Player</option>
                                         <option value="clappr-shaka">Clappr (DASH only)</option>
                                         <option value="dplayer-shaka">DPlayer</option>
                                         <option value="plyr-shaka">Plyr</option>
@@ -512,9 +512,10 @@
                                 await Promise.all([
                                     loadScript("https://github.com/videojs/mux.js/releases/download/v5.1.2/mux.js"),
                                     loadScript(
-                                        "https://cdnjs.cloudflare.com/ajax/libs/shaka-player/2.5.1/shaka-player.compiled.js"
+                                        "https://cdnjs.cloudflare.com/ajax/libs/shaka-player/2.5.1/shaka-player.compiled.debug.js"
                                     ),
                                 ]);
+                                //shaka.log.setLevel(shaka.log.Level.DEBUG);
 
                                 shaka.polyfill.installAll();
                                 if (!shaka.Player.isBrowserSupported()) {
